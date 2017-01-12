@@ -1,5 +1,20 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.core.serializers import serialize
 from models import Player, Team, College, HighSchool
+
+def index(request):
+
+    q1 = College.objects.all()
+    q2 = q1.order_by('nfl_name')
+    
+    json = serialize('geojson', q2,geometry_field="geom",
+          fields=('nfl_name',))
+    context = {
+        "teams":Team.objects.all(),
+        "col_json":json,
+    }
+    return render(request, 'index.html', context)
 
 def team_list(request):
     teams = Team.objects.all()
