@@ -37,8 +37,11 @@
                     </div>
                     <div class="col-md-4">
                     {% for team in teams %}
-                        <h6><a href="{% url 'team_page' code=team.code|lower %}">{{ team }}</a></h6>
+                        <button id="{{team.code|lower}}" class="t-btn">
+                            {{ team }}
+                        </button>
                     {% endfor %}
+                    
                     </div>
                 </div>
             </div>
