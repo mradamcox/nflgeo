@@ -17,82 +17,8 @@ var osm = {
     })
 };
 
-var image = new ol.style.Circle({
-radius: 5,
-fill: null,
-stroke: new ol.style.Stroke({color: 'red', width: 1})
-});
-
-var styles = {
-'Point': new ol.style.Style({
-  image: image
-}),
-'LineString': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'green',
-    width: 1
-  })
-}),
-'MultiLineString': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'green',
-    width: 1
-  })
-}),
-'MultiPoint': new ol.style.Style({
-  image: image
-}),
-'MultiPolygon': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'yellow',
-    width: 1
-  }),
-  fill: new ol.style.Fill({
-    color: 'rgba(255, 255, 0, 0.1)'
-  })
-}),
-'Polygon': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'blue',
-    lineDash: [4],
-    width: 3
-  }),
-  fill: new ol.style.Fill({
-    color: 'rgba(0, 0, 255, 0.1)'
-  })
-}),
-'GeometryCollection': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'magenta',
-    width: 2
-  }),
-  fill: new ol.style.Fill({
-    color: 'magenta'
-  }),
-  image: new ol.style.Circle({
-    radius: 10,
-    fill: null,
-    stroke: new ol.style.Stroke({
-      color: 'magenta'
-    })
-  })
-}),
-'Circle': new ol.style.Style({
-  stroke: new ol.style.Stroke({
-    color: 'red',
-    width: 2
-  }),
-  fill: new ol.style.Fill({
-    color: 'rgba(255,0,0,0.2)'
-  })
-})
-};
-
-var styleFunction = function(feature) {
-return styles[feature.getGeometry().getType()];
-};
-
 var json = JSON.parse(document.getElementById("col_json").value);
+console.log(json);
 
 var pointsSource = new ol.source.GeoJSON({
     projection: 'EPSG:3857',
@@ -102,13 +28,26 @@ var pointsSource = new ol.source.GeoJSON({
 var stylew = new ol.style.Style({
     image: new ol.style.Circle({
         radius: 5,
+        // stroke: new ol.style.Stroke({
+            // color: 'red',
+            // width: 2
+        // }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.2)'
+        })
+    })
+})
+
+var styleg = new ol.style.Style({
+    image: new ol.style.Circle({
+        radius: 5,
         stroke: new ol.style.Stroke({
             color: 'red',
             width: 2
         }),
-        fill: new ol.style.Fill({
-            color: 'rgba(255,0,0,0.2)'
-        })
+        // fill: new ol.style.Fill({
+            // color: 'rgba(0,0,230,0.2)'
+        // })
     })
 })
 
@@ -195,8 +134,32 @@ function tempRemoveOverlay() {
     });
 };
 
+function show_team() {
+    $('.t-btn').on('click', function() {
+        var code = this.id;
+        $.ajax({
+            url : '/json/'+code+'/',
+            dataType : 'json',
+            type : 'GET',
+            success: function(data)
+            {
+                var new_layer = new ol.layer.Vector({
+                    name: 'colleges',
+                    source: new ol.source.GeoJSON({
+                        projection: 'EPSG:3857',
+                        object: data,
+                    }),
+                    style: styleg,
+                });
+                collection.setAt(2, new_layer);
+                map.setLayerGroup = new ol.layer.Group(collection);
+            }
+        });
+    });
+}
 
 $(document).ready(function() {
     document.getElementById('layer-info').innerHTML = "";
     tempRemoveOverlay();
+    show_team();
 }); 
