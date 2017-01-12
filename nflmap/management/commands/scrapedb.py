@@ -10,8 +10,8 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        #maketeams.delete_all_teams()
-        #maketeams.make_teams()
+        maketeams.delete_all_teams()
+        maketeams.make_teams()
         scrapedb.delete_all_players()
         scrapedb.delete_all_colleges()
         scrapedb.run_the_site()
