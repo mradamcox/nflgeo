@@ -27,7 +27,7 @@ SECRET_KEY = '8&3(kab%7fbeox)f$!1ru3qf0nt)6csf96otjo$&4cx!l8=@9u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.163.163.186', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['nflgeo.adamcfcox.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
