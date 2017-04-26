@@ -1,4 +1,5 @@
 # exclude writeout files
+nfldb/settings_local.py
 nflmap/writeouts/
 static/*
 

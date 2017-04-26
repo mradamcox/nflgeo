@@ -27,7 +27,7 @@ SECRET_KEY = '8&3(kab%7fbeox)f$!1ru3qf0nt)6csf96otjo$&4cx!l8=@9u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nflgeo.adamcfcox.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['nflgeo.adamcfcox.com','projects.legiongis.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -145,3 +145,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+try:
+    from settings_local import *
+    print 'got it'
+except:
+    pass

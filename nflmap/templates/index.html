@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
     <h3>{{ team }}</h3>
     <div class="content-map">
@@ -15,5 +16,5 @@
     {% endfor %}
     </p>
     <input type="hidden" id="col_json" name="col_json" value="{{ col_json }}">
-    <script type='text/javascript' src="/static/js/map_base.js"></script>
+    <script type='text/javascript' src="{% static 'js/map_base.js' %}"></script>
 {% endblock %}

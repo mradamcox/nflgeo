@@ -138,7 +138,7 @@ function show_team() {
     $('.t-btn').on('click', function() {
         var code = this.id;
         $.ajax({
-            url : '/json/'+code+'/',
+            url : '/nflgeo/json/'+code+'/',
             dataType : 'json',
             type : 'GET',
             success: function(data)
